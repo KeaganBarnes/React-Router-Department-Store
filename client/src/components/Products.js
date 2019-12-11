@@ -13,8 +13,28 @@ class Products extends React.Component {
       })
   }
 
+  updateProduct = (id) => {
+    axios.put(`/api/products/${id}`)
+      .then(res => {
+        const products = this.state.products.map(t => {
+          if (t.id === id)
+            return res.data;
+          return t;
+        });
+        this.setState({ products, });
+      })
+  }
+
+  deleteProduct = (id) => {
+    axios.delete(`/api/products/${id}`)
+      .then(res => {
+        const { products, } = this.state;
+        this.setState({ products: products.filter(t => t.id !== id), })
+      })
+  }
+
   renderProducts = () => {
-    const { products } = this.state;
+    const { products, updateProduct, deleteProduct } = this.state;
     if (products.length <= 0)
       return <Header as="h2"> No Products Available </Header>
     return products.map(product => (
@@ -25,14 +45,23 @@ class Products extends React.Component {
           <Card.Description>{product.description}</Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <Button icon as={Link} to={`/products/${product.id}`} color='green'>
+          <Button
+            icon as={Link}
+            to={`/products/${product.id}`}
+            color='green'>
             <Icon name="eye" />
           </Button>
-          <Button icon as={Link} to={`/products/new/${product.id}`} color='grey'>
+          <Button
+            icon as={Link}
+            // onClick={() => updateProduct(id)}
+            color='grey'>
             <Icon name="pencil" />
           </Button>
-          <Button icon as={Link} to={`/products/${product.id}`} color='red'>
-            <Icon name="trash"/>
+          <Button
+            icon as={Link}
+            // onClick={() => deleteProduct(id)}
+            color='red'>
+            <Icon name="trash" />
           </Button>
         </Card.Content>
       </Card>
@@ -45,7 +74,7 @@ class Products extends React.Component {
         <Header as="h1"> Products </Header>
         <Link to="/products/new">
           <Button icon color="black">
-              <Icon name="add" />
+            <Icon name="add" />
           </Button>
         </Link>
         <hr />
