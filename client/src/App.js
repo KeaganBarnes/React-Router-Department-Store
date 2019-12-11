@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import About from "./components/About";
@@ -10,7 +9,7 @@ import ProductView from './components/ProductView';
 import { Route, Switch } from "react-router-dom";
 import { Container } from "semantic-ui-react";
 
-// This is where I tried to created my update and delete methods 
+// This is where I tried to created my update method
 // I tried to render them in the Products.js file inside of my buttons as well as 
   //rebuilding them but my 'undefined error' persisted
 
@@ -26,14 +25,6 @@ import { Container } from "semantic-ui-react";
 //   })
 // }
 
-// deleteProduct = (id) => {
-//   axios.delete(`/api/products/${id}`)
-//     .then( res => {
-//       const { products, } = this.state;
-//       this.setState({ products: products.filter(t => t.id !== id), })
-//     })
-// }
-
 const App = () => (
   <div>
     <Navbar />
@@ -43,7 +34,8 @@ const App = () => (
         <Route exact path="/about" component={About} />
         <Route exact path="/products" component={Products} />
         <Route exact path="/products/new" component={ProductForm} />
-        <Route exact path="/products/:id" component={ProductView} />
+        <Route exact path="/products/:id" component={ProductForm} />
+        <Route exact path="/product/:id" component={ProductView} />
         <Route component={NoMatch} />
       </Switch>
     </Container>

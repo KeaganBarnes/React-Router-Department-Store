@@ -6,10 +6,20 @@ class ProductForm extends React.Component {
   defaultValues = { name: "", price: "", description: "", department: "", };
   state = { ...this.defaultValues, };
 
+  componentDidMount() {
+    if(this.props.match.params.id){
+      axios.get(`/api/products/${this.props.match.params.id}`)
+      .then( res => {
+        const { name, price, description, department, } = res.data
+        this.setState({ name, price, description, department, })
+      } )
+    }
+  };
+
   handleSubmit = (e) => {
-    e.preventDefault();
-    const product = { ...this.state, };
-    axios.post("/api/products", product)
+    e.preventDefault()
+      const product = { ...this.state, };
+      axios.post("/api/products", product)
       .then( res => {
         this.props.history.push("/products");
       })
@@ -33,7 +43,7 @@ class ProductForm extends React.Component {
         >
           <Icon name="long arrow alternate left" />
         </Button>
-        <Header as="h1">New Product</Header>
+        <Header as="h1">{this.props.match.params.id ? "Edit Product" : "New Product"}</Header>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group widths="equal">
             <Form.Input

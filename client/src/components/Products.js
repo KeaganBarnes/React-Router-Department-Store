@@ -14,15 +14,11 @@ class Products extends React.Component {
   }
 
   updateProduct = (id) => {
-    axios.put(`/api/products/${id}`)
+    const { product } = { ...this.state }
+    axios.put(`/api/products/${id}`, product)
       .then(res => {
-        const products = this.state.products.map(t => {
-          if (t.id === id)
-            return res.data;
-          return t;
-        });
-        this.setState({ products, });
-      })
+        this.props.history.push("/products");
+      });
   }
 
   deleteProduct = (id) => {
@@ -34,6 +30,7 @@ class Products extends React.Component {
   }
 
   renderProducts = () => {
+    // if toggle is true, render productform
     const { products, updateProduct, deleteProduct } = this.state;
     if (products.length <= 0)
       return <Header as="h2"> No Products Available </Header>
@@ -47,19 +44,19 @@ class Products extends React.Component {
         <Card.Content extra>
           <Button
             icon as={Link}
-            to={`/products/${product.id}`}
+            to={`/product/${product.id}`}
             color='green'>
             <Icon name="eye" />
           </Button>
           <Button
-            icon as={Link}
-            // onClick={() => updateProduct(id)}
+            icon as={Link} to={`/products/${product.id}`}
+            onClick={() => this.toggleUpdate}
             color='grey'>
             <Icon name="pencil" />
           </Button>
           <Button
             icon as={Link}
-            // onClick={() => deleteProduct(id)}
+            onClick={() => this.deleteProduct(product.id)}
             color='red'>
             <Icon name="trash" />
           </Button>
