@@ -1,8 +1,12 @@
 import React from "react";
-import { Header } from "semantic-ui-react";
 
 const NoMatch = () => (
-  <Header as="h1"> 404 Page Not Found </Header>
-)
+  <div>
+    <center>
+      <h1>Error: 404 - No Page Found</h1>
+      <img src="https://thumbs.gfycat.com/HastyUnhappyKoi-size_restricted.gif" />
+    </center>
+  </div>
+);
 
 export default NoMatch;

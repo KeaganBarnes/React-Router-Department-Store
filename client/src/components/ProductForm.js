@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Form, Header, } from "semantic-ui-react";
+import { Form, Header, Button, Icon } from "semantic-ui-react";
 
 class ProductForm extends React.Component {
   defaultValues = { name: "", price: "", description: "", department: "", };
@@ -26,6 +26,13 @@ class ProductForm extends React.Component {
 
     return (
       <div>
+        <Button 
+          icon
+          color="black" 
+          onClick={this.props.history.goBack}
+        >
+          <Icon name="long arrow alternate left" />
+        </Button>
         <Header as="h1">New Product</Header>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group widths="equal">

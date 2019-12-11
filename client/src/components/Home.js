@@ -1,8 +1,12 @@
 import React from "react";
-import { Header } from "semantic-ui-react";
 
 const Home = () => (
-  <Header as="h1"> Home </Header>
+  <div>
+    <center>
+      <h1> Home </h1>
+      <hr />
+      <img src="https://media.giphy.com/media/l0MYC0LajbaPoEADu/giphy.gif" />
+    </center>
+  </div>
 )
-
 export default Home;

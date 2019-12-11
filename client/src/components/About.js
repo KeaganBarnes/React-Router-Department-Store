@@ -1,8 +1,13 @@
 import React from "react";
-import { Header } from "semantic-ui-react";
 
 const About = () => (
-  <Header as="h1"> About </Header>
+  <div>
+    <center>
+      <h1> About </h1>
+      <hr />
+      <img src="https://media1.giphy.com/media/RLHP0SjHQQjIc/giphy.gif" />
+    </center>
+  </div>
 )
 
 export default About;
